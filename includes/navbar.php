@@ -1,5 +1,7 @@
 <?php
-$user = getUser();
+if(isset($_SESSION['user'])){
+    $user = getUser();
+}
 ?>
 <div class="fixed w-full mb-10 flex justify-between items-center bg-[#11999E] px-[5%] py-2">
     <a href="index.php" class="text-[#E4F9F5] text-3xl font-bold">EduFlow</a>
@@ -54,8 +56,7 @@ $user = getUser();
                 <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
             </div>
         </div>
-    <?php
-    else: ?>
+    <?php else: ?>
         <a href="login.php" class="">Login</a>
     <?php endif; ?>
     <!-- avatar work end  -->

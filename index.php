@@ -1,6 +1,8 @@
 <?php
     include_once "config/connect.php";
-    $user = getUser();
+    if(isset($_SESSION['user'])){
+        $user = getUser();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

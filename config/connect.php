@@ -27,17 +27,8 @@ function msg($msg)
 function getUser()
 {
     global $connect;
-    if (isset($_SESSION['user'])) {
-        if (isset($_SESSION['admin'])) {
-            $email = $_SESSION['admin'];
-            $query = $connect->query("select * from users where email='$email'");
-        } else {
-            $email = $_SESSION['user'];
-            $query = $connect->query("select * from users where email='$email'");
-        }
-        $userData = $query->fetch_assoc();
-        return $userData;
-    }
-
-    
+    $email = $_SESSION['user'];
+    $query = $connect->query("select * from users where email='$email'");
+    $userData = $query->fetch_array();
+    return $userData;
 }

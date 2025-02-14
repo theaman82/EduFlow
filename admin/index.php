@@ -19,8 +19,8 @@ include_once "includes/redirectIfNotAuth.php";
     <?php include_once "includes/adminHeader.php"; ?>
     <div class="flex w-full">
         <?php include_once "includes/admin_sidebar.php"; ?>
+        <div class="w-2/6 pt-14 ">Hello Aman</div>
     </div>
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>

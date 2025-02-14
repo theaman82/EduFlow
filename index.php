@@ -1,8 +1,8 @@
 <?php
-    include_once "config/connect.php";
-    if(isset($_SESSION['user'])){
-        $user = getUser();
-    }
+include_once "config/connect.php";
+if (isset($_SESSION['user'])) {
+    $user = getUser();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +34,7 @@
     <div class="flex flex-col gap-2 justify-center mt-14">
         <h1 class="text-white font-semibold text-xl tracking-wide px-3 py-2 rounded bg-[#40514E] text-center w-full">Our Batches</h1>
         <!-- To switch offline to online batches  -->
+
         <div class="mb-4 dark:border-gray-700 justify-center items-center flex">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
                 <li class="me-2" role="presentation">
@@ -47,58 +48,29 @@
 
         <!-- course card  -->
         <div class="grid grid-cols-4 gap-5 px-5">
-            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
-                <img class="rounded-t-lg" src="assets/img1.jpg" alt="" />
-                <div class="p-5">
-                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">PHP BATCH</h2>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">this batch is running from 11-12-2024, In this batch We're Cover All topics of php</p>
-                    <a href="" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 ">
-                        Details
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
-                    </a>
+            <?php
+            $callingCat = $connect->query("select * from courses ");
+            while ($course = $callingCat->fetch_array()):
+
+            ?>
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <img class="rounded-t-lg" src="assets/template/<?= $course['template']; ?>" alt="" />
+                    <div class="p-5">
+                        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><?= $course['title']; ?></h2>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><?= $course['description']; ?></p>
+                        <p class="mb-3 font-normal text-red-500 dark:text-gray-400"><?= $course['course_type']; ?></p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Running From - <?= $course['date']; ?></p>
+                        <a href="" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 ">
+                            Details
+                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
-                <img class="rounded-t-lg" src="assets/img1.jpg" alt="" />
-                <div class="p-5">
-                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">PHP BATCH</h2>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">this batch is running from 11-12-2024, In this batch We're Cover All topics of php</p>
-                    <a href="" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 ">
-                        Details
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
-                <img class="rounded-t-lg" src="assets/img1.jpg" alt="" />
-                <div class="p-5">
-                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">PHP BATCH</h2>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">this batch is running from 11-12-2024, In this batch We're Cover All topics of php</p>
-                    <a href="" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 ">
-                        Details
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
-                <img class="rounded-t-lg" src="assets/img1.jpg" alt="" />
-                <div class="p-5">
-                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">PHP BATCH</h2>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">this batch is running from 11-12-2024, In this batch We're Cover All topics of php</p>
-                    <a href="" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 ">
-                        Details
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
+
+            <?php endwhile; ?>
+
         </div>
     </div>
     <div class="flex flex-col justify-center mt-14 gap-5">

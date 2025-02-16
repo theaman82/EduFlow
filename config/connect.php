@@ -7,7 +7,7 @@ session_start();
 function redirectIfNotAuth()
 {
     if (!isset($_SESSION['user'])) {
-        redirectTo("../login.php");
+        redirectTo("login.php");
     }
 }
 
@@ -31,4 +31,14 @@ function getUser()
     $query = $connect->query("select * from users where email='$email'");
     $userData = $query->fetch_array();
     return $userData;
+}
+
+function addToMycourse($course_id)
+{
+    global $connect;
+    if (!isset($_SESSION["user"])) {
+        redirectTo("login.php");
+    }
+
+    
 }

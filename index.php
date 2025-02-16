@@ -47,31 +47,31 @@ if (isset($_SESSION['user'])) {
         </div>
 
         <!-- course card  -->
-        <div class="grid grid-cols-4 gap-5 px-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-5 w-full">
             <?php
-            $callingCat = $connect->query("select * from courses ");
+            $callingCat = $connect->query("SELECT * FROM courses");
             while ($course = $callingCat->fetch_array()):
-
             ?>
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
-                    <img class="rounded-t-lg" src="assets/template/<?= $course['template']; ?>" alt="" />
-                    <div class="p-5">
-                        <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><?= $course['title']; ?></h2>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><?= $course['description']; ?></p>
-                        <p class="mb-3 font-normal text-red-500 dark:text-gray-400"><?= $course['course_type']; ?></p>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Running From - <?= $course['date']; ?></p>
-                        <a href="" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 ">
-                            Details
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
+
+                    <div class="w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+                        <img class="rounded-t-lg w-full h-40 object-cover" src="assets/template/<?= $course['template']; ?>" alt="Course Image" />
+                        <div class="p-5">
+                            <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><?= $course['title']; ?></h2>
+                            <p class="mb-3 font-normal text-gray-700"><?= $course['description']; ?></p>
+                            <p class="mb-3 font-normal text-red-500"><?= $course['course_type']; ?></p>
+                            <p class="mb-3 font-normal text-gray-700">Running From - <?= $course['date']; ?></p>
+                            <a href="view.php?c_id=<?= $course['id']; ?>" class=" inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800">
+                                Details
+                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
-                </div>
-
+               
             <?php endwhile; ?>
-
         </div>
+
     </div>
     <div class="flex flex-col justify-center mt-14 gap-5">
         <h1 class="text-white font-semibold text-xl tracking-wide px-3 py-2 rounded bg-[#40514E] text-center w-full">Visit Our Offline Center</h1>

@@ -1,5 +1,6 @@
 <?php
 include_once "config/connect.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +19,7 @@ include_once "config/connect.php";
     <?php include_once "includes/navbar.php"; ?>
     <div class="flex w-full">
         <?php include_once "includes/sidebar.php";?>
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>

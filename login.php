@@ -26,6 +26,7 @@
             </div>
             <hr>
             <a href="register.php" class="font-semibold ">Don't have an account? <span class="text-black">Register Now</span></a>
+            <a href="index.php" class=" bg-blue-600 text-white font-semibold w-fit px-2 rounded text-center">Go Back To Home</a>
         </form>
     </div>
 </body>

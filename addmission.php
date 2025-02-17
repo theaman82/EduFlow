@@ -92,7 +92,7 @@ if (isset($_SESSION['user'])) {
 
             if($query){
                 msg("Addmission Successfully");
-                redirectTo("index.php");
+                redirectTo("user_dashboard.php");
             }
             else{
                 msg("Addmission Not Successful");

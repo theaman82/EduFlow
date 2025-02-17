@@ -3,6 +3,10 @@ include_once "config/connect.php";
 if (isset($_SESSION['user'])) {
     $user = getUser();
 }
+else{
+    redirectTo("login.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

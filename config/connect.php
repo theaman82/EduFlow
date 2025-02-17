@@ -33,12 +33,15 @@ function getUser()
     return $userData;
 }
 
-function addToMycourse($course_id)
-{
-    global $connect;
-    if (!isset($_SESSION["user"])) {
-        redirectTo("login.php");
+function validateName($name) {
+    // Trim whitespace
+    $name = trim($name);
+    
+    // Regular expression for a valid name (allows letters and spaces only)
+    if (!preg_match("/^[a-zA-Z ]{2,50}$/", $name)) {
+        return "Invalid name. Only letters and spaces allowed (2-50 characters).";
     }
 
-    
+    return "Valid name.";
 }
+

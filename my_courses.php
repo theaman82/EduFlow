@@ -19,26 +19,29 @@ include_once "config/connect.php";
     <?php include_once "includes/navbar.php"; ?>
     <div class="flex w-full">
         <?php include_once "includes/sidebar.php"; ?>
-        <div class="w-8/12 flex flex-col gap-4 px-3 pt-28">
-            
+        <div class="w-8/12 flex flex-col gap-4 px-5 pt-24">
+            <h1 class="text-xl font-bold">My Courses</h1>
             <?php
-                $calling_enrollCourse =   $connect->query("select * from enroll_course where status='0'");
-                $getCourse = $calling_enrollCourse->fetch_assoc();
-                $countCourse = $calling_enrollCourse->num_rows;
-                if($countCourse):
-                    $course_id = $getCourse['course_id'];
-                    $calling_course = $connect->query("select * from my_course join courses on my_course.course_id=courses.id where user_id='$course_id'");
-                    while($course = $calling_course->fetch_array()):
+            $calling_enrollCourse =   $connect->query("select * from enroll_course where status='0'");
+            $getCourse = $calling_enrollCourse->fetch_assoc();
+            $countCourse = $calling_enrollCourse->num_rows;
+            if ($countCourse):
+                $course_id = $getCourse['course_id'];
+                $calling_course = $connect->query("select * from my_course join courses on my_course.course_id=courses.id where user_id='$course_id'");
+                while ($course = $calling_course->fetch_array()):
             ?>
-            <div class="border">
-            <h1>name is : <?= $course['title']?></h1>
-            <img src="assets/template/<?= $course['template'];?>" class="w-32" alt="">
-            </div>
-            <?php endwhile;
-                else:
-            ?>
-            <h1>Empty</h1>
-            <?php endif;?>
+                    <div class="shadow border flex gap-5 border-gray-400 rounded p-2">
+                        <img src="assets/template/<?= $course['template']; ?>" class="w-32" alt="">
+                        <div class="flex justify-center flex-col gap-2">
+                            <h2 class="uppercase font-semibold text-lg"><?= $course['title'];?></h2>
+                            <p class="capitalize">🔴 <?= $course['course_type']?></p>
+                        </div>
+                    </div>
+                <?php endwhile;
+            else:
+                ?>
+                <h1>Empty</h1>
+            <?php endif; ?>
         </div>
     </div>
 

@@ -49,8 +49,8 @@ if (isset($_SESSION['user'])) {
                     <select name="gender" id="" class="rounded bg-white">
                         <option value="" selected disabled>select Gender</option>
                         <option value="male">male</option>
-                        <option value="male">female</option>
-                        <option value="male">other</option>
+                        <option value="female">female</option>
+                        <option value="other">other</option>
                     </select>
                 </div>
                 <div class="flex flex-col gap-2">
@@ -66,13 +66,40 @@ if (isset($_SESSION['user'])) {
 
                 <div class="flex flex-col w-3/6 gap-2">
                     <label for="" class="text-lg">Contact</label>
-                    <input type="text" name="address" class="p-1 rounded">
+                    <input type="text" name="contact" class="p-1 rounded">
                 </div>
                 <div class="w-3/6">
                     <input type="submit" name="submit" value="Submit Form" class="bg-teal-700 px-3 py-2 mt-6 rounded font-semibold text-white w-full">
                 </div>
             </div>
         </form>
+        <?php
+        if(isset($_POST['submit'])){
+            $full_name = $_POST['full_name'];
+            $father_name = $_POST['father_name'];
+            $dob = $_POST['dob'];
+            $email = $_POST['email'];
+            $gender = $_POST['gender'];
+            $education = $_POST['education'];
+            $address = $_POST['address'];
+            $contact = $_POST['contact'];
+            $photo = $_FILES['photo']['name'];
+            $tmp_name = $_FILES['photo']['tmp_name'];
+
+            move_uploaded_file("$tmp_name","assets/students_photo/$photo");
+
+            $query = $connect->query("insert into addmission (full_name, father_name, dob, email, photo, gender, education, address, contact) value('$full_name','$father_name','$dob','$email','$photo','$gender','$education','$address','$contact')");
+
+            if($query){
+                msg("Addmission Successfully");
+                redirectTo("index.php");
+            }
+            else{
+                msg("Addmission Not Successful");
+            }
+
+        }
+        ?>
     </div>
 </body>
 

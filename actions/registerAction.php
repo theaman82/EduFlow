@@ -7,8 +7,13 @@ if (isset($_POST['register'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if (!validateName($first_name)) {
+    if (!preg_match('/^[A-Za-z ]+$/',$first_name)) {
         msg("Invalid First Name. Only letters and spaces allowed (2-50 characters).");
+        redirectTo("../register.php");
+        exit(); // Stop execution if validation fails
+    }
+    if (!preg_match('^[A-Za-z ]+$^',$last_name)) {
+        msg("Invalid last Name. Only letters and spaces allowed (2-50 characters).");
         redirectTo("../register.php");
         exit(); // Stop execution if validation fails
     }

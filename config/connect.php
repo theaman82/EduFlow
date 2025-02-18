@@ -27,10 +27,17 @@ function msg($msg)
 function getUser()
 {
     global $connect;
-    $email = $_SESSION['user'];
-    $query = $connect->query("select * from users where email='$email'");
-    $userData = $query->fetch_array();
-    return $userData;
+    if(isset($_SESSION['user'])){
+        $email = $_SESSION['user'];
+    }
+    else{
+        $email = $_SESSION['admin'];
+    }
+        $query = $connect->query("select * from users where email='$email'");
+        $userData = $query->fetch_array();
+        return $userData;
+    
+   
 }
 
 function validateName($name) {
@@ -38,7 +45,7 @@ function validateName($name) {
     $name = trim($name);
     
     // Regular expression for a valid name (allows letters and spaces only)
-    if (!preg_match("/^[a-zA-Z ]{2,50}$/", $name)) {
+    if (!preg_match("^[A-Za-z ]+$", $name)) {
         return "Invalid name. Only letters and spaces allowed (2-50 characters).";
     }
 

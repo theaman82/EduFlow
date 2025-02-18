@@ -1,6 +1,9 @@
 <?php
 include_once "../config/connect.php";
 include_once "includes/redirectIfNotAuth.php";
+if(isset($_SESSION['admin'])){
+    $admin = getUser();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +22,15 @@ include_once "includes/redirectIfNotAuth.php";
     <?php include_once "includes/adminHeader.php"; ?>
     <div class="flex w-full">
         <?php include_once "includes/admin_sidebar.php"; ?>
-        <div class="w-2/6 pt-14 ">Hello Aman</div>
+        <div class="w-2/6 pt-24 px-12 ">
+            <?php
+                if(isset($_SESSION['admin'])):
+            ?>
+            <h1 class="text-2xl font-semibold text-gray-400">Hello, <?= $admin['first_name'];?></h1>
+            <?php else:?>
+                <h1>Hello User</h1>
+                <?php endif;?>
+        </div>
     </div>
 
 

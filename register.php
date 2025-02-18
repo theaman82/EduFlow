@@ -29,7 +29,7 @@
                 <input type="email" name="email" id="" class="border text-black p-2 rounded outline-none" required>
             </div>
             <div class="flex flex-col gap-2">
-                <label for="" class="text-lg font-semibold">Password :-</label>
+                <label for="" class="text-lg font-semibold">Create Password :-</label>
                 <input type="password" name="password" id="" class="border text-black p-2 rounded outline-none" required>
             </div>
             <div>

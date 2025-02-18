@@ -24,26 +24,26 @@ $count = $callingData->num_rows;
         <div class="w-5/6 bg-[#E4F9F5] pt-20 px-5 ">
             <div class="flex gap-5">
                 <div class="w-4/6">
-                    <h1 class="text-xl font-semibold">Manage Subjects (<?= $count;?>)</h1>
+                    <h1 class="text-xl font-semibold">Manage Courses (<?= $count;?>)</h1>
                     <table class="w-full mt-4">
                         <thead>
                             <tr>
                                 <th class="border p-2">Id</th>
-                                <th class="border p-2">Subject Title</th>
+                                <th class="border p-2">Course Title</th>
                                 <th class="border p-2">Description</th>
                                 <th class="border p-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                             while($subject = $callingData->fetch_array()):
+                             while($course = $callingData->fetch_array()):
                             ?>
                             <tr>
-                                <td class="border p-2"><?= $subject['subject_id'];?></td>
-                                <td class="border p-2"><?= $subject['title'];?></td>
-                                <td class="border p-2"><?= $subject['description'];?></td>
-                                <td class="border p-2">
-                                    <a href="" class="bg-red-500 p-1 rounded text-sm text-white">Remove</a>
+                                <td class="border-b border-gray-400 text-center p-2"><?= $course['subject_id'];?></td>
+                                <td class="border-b border-gray-400 text-center p-2"><?= $course['title'];?></td>
+                                <td class="border-b border-gray-400 text-center p-2"><?= $course['description'];?></td>
+                                <td class="border-b border-gray-400 text-center p-2">
+                                    <a href="?removeCourse=<?= $course['subject_id'];?>" class="bg-red-500 p-1 rounded text-sm text-white">Remove</a>
                                 </td>
                             </tr>
                             <?php endwhile; ?>
@@ -51,10 +51,10 @@ $count = $callingData->num_rows;
                     </table>
                 </div>
                 <div class="w-2/6">
-                    <h1 class="text-xl font-semibold">Insert Subject</h1>
-                    <form action="" class="flex flex-col px-5 py-3 bg-amber-200 mt-4 gap-4" method="post">
+                    <h1 class="text-xl font-semibold">Insert Course</h1>
+                    <form action="" class="flex flex-col px-5 py-3 bg-gray-200 mt-4 gap-4" method="post">
                         <div class="flex flex-col gap-1">
-                            <label for="" class="text-lg">Subject Title</label>
+                            <label for="" class="text-lg">Course Title</label>
                             <input type="text" name="title" id="" class="border p-2 rounded">
                         </div>
                         <div class="flex flex-col gap-1">
@@ -62,7 +62,7 @@ $count = $callingData->num_rows;
                             <textarea name="description" rows="5" id="" class="rounded bg-white text-black"></textarea>
                         </div>
                         <div>
-                            <input type="submit" value="Insert Subject" name="insert" class="bg-teal-500 px-3 py-2 rounded font-semibold w-full text-white">
+                            <input type="submit" value="Insert Course" name="insert" class="bg-teal-500 px-3 py-2 rounded font-semibold w-full text-white">
                         </div>
                     </form>
                     <?php
@@ -93,3 +93,16 @@ $count = $callingData->num_rows;
 </body>
 
 </html>
+<?php
+if(isset($_GET['removeCourse'])){
+    $subject_id = $_GET['removeCourse'];
+
+    $query =  $connect->query("delete from subjects where subject_id='$subject_id'");
+    if($query){
+        redirectTo("manage_subject.php");
+    }
+    else{
+        msg("Error deleting");
+    }
+
+}

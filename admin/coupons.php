@@ -1,7 +1,7 @@
 <?php
 include_once "../config/connect.php";
 include_once "includes/redirectIfNotAuth.php";
-$callingData = $connect->query("select * from subjects");
+$callingData = $connect->query("select * from coupons");
 $count = $callingData->num_rows;
 ?>
 <!DOCTYPE html>
@@ -24,26 +24,26 @@ $count = $callingData->num_rows;
         <div class="w-5/6 bg-[#E4F9F5] pt-20 px-5 ">
             <div class="flex gap-5">
                 <div class="w-4/6">
-                    <h1 class="text-xl font-semibold">Manage Courses (<?= $count;?>)</h1>
+                    <h1 class="text-xl font-semibold">Manage Coupons (<?= $count;?>)</h1>
                     <table class="w-full mt-4">
                         <thead>
                             <tr>
-                                <th class="border-b border-gray-400 p-2">Id</th>
-                                <th class="border-b border-gray-400 p-2">Course Title</th>
-                                <th class="border-b border-gray-400 p-2">Description</th>
+                                <th class="border-b border-gray-400 p-2">Coupon Id</th>
+                                <th class="border-b border-gray-400 p-2">Coupon code</th>
+                                <th class="border-b border-gray-400 p-2">Coupon Amount</th>
                                 <th class="border-b border-gray-400 p-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                             while($course = $callingData->fetch_array()):
+                             while($coupon = $callingData->fetch_array()):
                             ?>
                             <tr>
-                                <td class="border-b border-gray-400 text-center p-2"><?= $course['subject_id'];?></td>
-                                <td class="border-b border-gray-400 text-center p-2"><?= $course['title'];?></td>
-                                <td class="border-b border-gray-400 text-center p-2"><?= $course['description'];?></td>
+                                <td class="border-b border-gray-400 text-center p-2"><?= $coupon['coupon_id'];?></td>
+                                <td class="border-b border-gray-400 text-center p-2"><?= $coupon['coupon_code'];?></td>
+                                <td class="border-b border-gray-400 text-center p-2"><?= $coupon['coupon_amount'];?></td>
                                 <td class="border-b border-gray-400 text-center p-2">
-                                    <a href="?removeCourse=<?= $course['subject_id'];?>" class="bg-red-500 p-1 rounded text-sm text-white">Remove</a>
+                                    <a href="?removecoupon=<?= $coupon['coupon_id'];?>" class="bg-red-500 p-1 rounded text-sm text-white">Remove</a>
                                 </td>
                             </tr>
                             <?php endwhile; ?>
@@ -51,34 +51,34 @@ $count = $callingData->num_rows;
                     </table>
                 </div>
                 <div class="w-2/6">
-                    <h1 class="text-xl font-semibold">Insert Course</h1>
+                    <h1 class="text-xl font-semibold">Insert Coupon</h1>
                     <form action="" class="flex flex-col px-5 py-3 bg-gray-200 mt-4 gap-4" method="post">
                         <div class="flex flex-col gap-1">
-                            <label for="" class="text-lg">Course Title</label>
-                            <input type="text" name="title" id="" class="border p-2 rounded">
+                            <label for="" class="text-lg">Coupon Code</label>
+                            <input type="text" name="coupon_code" id="" class="border p-2 rounded">
                         </div>
                         <div class="flex flex-col gap-1">
-                            <label for="" class="text-lg">Description</label>
-                            <textarea name="description" rows="5" id="" class="rounded bg-white text-black"></textarea>
+                            <label for="" class="text-lg">Coupon Amount</label>
+                            <input type="text" name="coupon_amount" class="rounded bg-white text-black"></input>
                         </div>
                         <div>
-                            <input type="submit" value="Insert Course" name="insert" class="bg-teal-500 px-3 py-2 rounded font-semibold w-full text-white">
+                            <input type="submit" value="Insert Coupon" name="insert_coupon" class="bg-teal-500 px-3 py-2 rounded font-semibold w-full text-white">
                         </div>
                     </form>
                     <?php
-                        if(isset($_POST['insert'])){
-                            $title = $_POST['title'];
-                            $description = $_POST['description'];
+                        if(isset($_POST['insert_coupon'])){
+                           $coupon_code = $_POST['coupon_code'];
+                           $coupon_amount =  $_POST['coupon_amount'];
 
-                            $query = $connect->query("insert into subjects (title, description)
-                            values('$title','$description')");
+                            $query = $connect->query("insert into coupons (coupon_code, coupon_amount)
+                            values('$coupon_code','$coupon_amount')");
 
                             if($query){
                                 msg("inserted successfully");
-                                redirectTo("manage_subject.php");
+                                redirectTo("coupons.php");
                             }
                             else{
-                                msg("something went wrong");
+                                msg("Not Applied");
                             }
                         }
                     ?>
@@ -94,15 +94,3 @@ $count = $callingData->num_rows;
 
 </html>
 <?php
-if(isset($_GET['removeCourse'])){
-    $subject_id = $_GET['removeCourse'];
-
-    $query =  $connect->query("delete from subjects where subject_id='$subject_id'");
-    if($query){
-        redirectTo("manage_subject.php");
-    }
-    else{
-        msg("Error deleting");
-    }
-
-}

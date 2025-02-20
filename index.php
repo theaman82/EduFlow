@@ -63,6 +63,8 @@ if (isset($_SESSION['user'])) {
                         <p class="mb-3 font-normal truncate text-gray-700"><?= $course['description']; ?></p>
                         <p class="mb-3 font-normal text-red-500"><?= $course['course_type']; ?></p>
                         <p class="mb-3 font-normal text-gray-700">Running From - <?= $course['date']; ?></p>
+                        <p class="mb-3 text-lg font-semibold text-gray-700">$ <?= $course['price']; ?></p>
+                        
                         <a href="view.php?c_id=<?= $course['id']; ?>" class=" inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800">
                             Details
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">

@@ -40,8 +40,9 @@ $single_course = $query->fetch_array();
                         <h1 class="text-2xl font-semibold"><?= $single_course['title']; ?></h1>
                         <p class="text-lg text-gray-800">Starting From - <?= date("F d, Y", strtotime($single_course['date'])); ?></p>
                         <p class="capitalize"> <?= $single_course['course_type']; ?> Batch</p>
+                        <p class="capitalize text-xl font-semibold"> $ <?= $single_course['price']; ?></p>
                         <?php if($single_course['course_type'] == "online"):?>
-                        <a href=view.php?add_to_myCourse=<?= $single_course['id'];?>&c_id=<?=$single_course['id']?> class="bg-blue-500 px-3 py-2 rounded text-white font-semibold w-fit">🚀 Enroll Now</a>
+                        <a href="payment.php?b_id=<?= $single_course['id']; ?>" class="bg-blue-500 px-3 py-2 rounded text-white font-semibold w-fit">🚀 Enroll Now</a>
                         <?php else:?>
                             <a href='addmission.php' class="bg-blue-500 px-3 py-2 rounded text-white font-semibold w-fit">Take Addmission</a>
                             <?php endif;?>

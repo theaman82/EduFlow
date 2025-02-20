@@ -21,19 +21,19 @@ include_once "includes/redirectIfNotAuth.php";
         <?php include_once "includes/admin_sidebar.php"; ?>
         <div class="w-5/6 bg-[#E4F9F5] pt-16 px-5 ">
             <div class="flex justify-between">
-                <p class="font-semibold text-2xl">insert here</p> <a href="" class="px-3 text-white rounded py-2 bg-teal-500">Go Back</a>
+                <p class="font-semibold text-2xl">Insert Batch</p> <a href="" class="px-3 text-white rounded py-2 bg-teal-500">Go Back</a>
             </div>
             <div class="flex  flex-1 w-full p-5 shadow-xl">
                 <form action="" method="post" enctype="multipart/form-data" class="w-full">
                     <div class="grid grid-cols-2 gap-5">
                         <div class="flex w-full flex-col">
-                            <label for="" class="text-lg font-semibold">Course Title</label>
-                            <input type="text" name="title" placeholder="enter exam title" class="px-2 py-2 w-full  outline-none border border-gray-400 rounded">
+                            <label for="" class="text-lg font-semibold">Batch Title</label>
+                            <input type="text" name="title" class="px-2 py-2 w-full  outline-none border border-gray-400 rounded">
                         </div>
                         <div class="flex w-full flex-col">
-                            <label for="" class="text-lg font-semibold">Course Subject</label>
+                            <label for="" class="text-lg font-semibold">Course Name</label>
                             <select name="subject" id="" class="bg-white">
-                                <option value="" selected disabled>Select Subject</option>
+                                <option value="" selected disabled>Select Course</option>
                                 <?php
                                 $callingSub = $connect->query("select * from subjects");
                                 while ($sub = mysqli_fetch_array($callingSub)) {
@@ -51,17 +51,24 @@ include_once "includes/redirectIfNotAuth.php";
                             <input type="file" name="template" class=" w-full bg-white outline-none border border-gray-400 rounded">
                         </div>
                     </div>
-                    <div class="mt-5 flex gap-5 items-center">
-                        <label for="course_type">Course Type:</label>
-                        <div class="flex gap-1 items-center">
-                            <input type="radio" value="online" name="course_type" id="online">
-                            <label for="online">Online</label>
+                    <div class="mt-5 grid grid-cols-2 gap-5 ">
+                        <div class="flex items-center gap-5">
+                            <label for="course_type">Batch Type:</label>
+                            <div class="flex gap-1 items-center">
+                                <input type="radio" value="online" name="course_type" id="online">
+                                <label for="online">Online</label>
+                            </div>
+                            <div class="flex gap-1 items-center">
+                                <input type="radio" value="offline" name="course_type" id="offline">
+                                <label for="offline">Offline</label>
+                            </div>
                         </div>
-                        <div class="flex gap-1 items-center">
-                            <input type="radio" value="offline" name="course_type" id="offline">
-                            <label for="offline">Offline</label>
+                        <div class="flex w-full flex-col">
+                            <label for="" class="text-lg font-semibold">Price</label>
+                            <input type="number" name="price" class="px-2 py-2 w-full  outline-none border border-gray-400 rounded">
                         </div>
                     </div>
+
 
                     <div class="flex w-full mt-5 flex-col">
                         <label for="" class="text-lg font-semibold">Description</label>
@@ -76,16 +83,17 @@ include_once "includes/redirectIfNotAuth.php";
                     $date = $_POST['date'];
                     $description = $_POST['description'];
                     $course_type = $_POST['course_type'];
+                    $price = $_POST['price'];
 
                     $template = $_FILES['template']['name'];
                     $tmp_name = $_FILES['template']['tmp_name'];
 
                     move_uploaded_file("$tmp_name", "../assets/template/$template");
 
-                    $query = $connect->query("insert into courses (title, subject, date, description,course_type, template) values('$title','$subject','$date','$description','$course_type','$template')");
+                    $query = $connect->query("insert into courses (title, subject, date, description,course_type, template, price) values('$title','$subject','$date','$description','$course_type','$template','$price')");
 
                     if ($query) {
-                        // redirectTo("all_courses.php");
+                        redirectTo("all_courses.php");
                     } else {
                         msg("not inserted");
                     }

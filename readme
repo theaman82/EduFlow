@@ -1,2 +1,6 @@
 order_items = my_course
 orders = enroll_course
+
+
+
+// view.php?add_to_myCourse=<?= $single_course['id'];?>&c_id=<?=$single_course['id']?>

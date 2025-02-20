@@ -19,7 +19,7 @@ include_once "config/connect.php";
     <?php include_once "includes/navbar.php"; ?>
     <div class="flex w-full">
         <?php include_once "includes/sidebar.php"; ?>
-        <div class="w-8/12 flex flex-col gap-4 px-5 pt-24">
+        <div class="w-8/12 flex flex-col gap-4 px-5 pt-24 pb-12">
             <h1 class="text-xl font-bold">My Courses</h1>
             <?php
             $calling_enrollCourse =   $connect->query("select * from enroll_course where status='0'");

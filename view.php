@@ -64,36 +64,4 @@ $single_course = $query->fetch_array();
 
 </html>
 <?php
-if(isset($_GET['add_to_myCourse'])){
-    $course_id = $_GET['add_to_myCourse'];
 
-    $check_enrollCourse = $connect->query("select * from enroll_course where status='0'");
-    $count_enrollCourse = $check_enrollCourse->num_rows;
-    if($count_enrollCourse){
-        $existCourse = $check_enrollCourse->fetch_array();
-        
-        $enroll_courseIid = $existCourse['course_id'];
-        $check_course = $connect->query("select * from my_course where user_id='$enroll_courseIid' and course_id='$course_id'");
-        $count_enrolledCourse = $check_course->num_rows;
-        if($count_enrolledCourse){
-            msg("course Already enrolled");
-        }
-        else{
-            $create_enrollCourse = $connect->query("insert into my_course (user_id, course_id)
-            value ('$enroll_courseIid', '$course_id')");
-        }
-    }else{
-        $create_course =$connect->query("insert into enroll_course (status) value('0')");
-        $enroll_courseIid = mysqli_insert_id($connect);
-        $check_course = $connect->query("select * from my_course where user_id='$enroll_courseIid' and course_id='$course_id'");
-        $count_enrolledCourse = $check_course->num_rows;
-        if($count_enrolledCourse){
-            msg("course Already enrolled");
-        }
-        else{
-            $create_enrollCourse = $connect->query("insert into my_course (user_id, course_id)
-            value='$enroll_courseid', '$course_id'");
-        }
-    }
-    redirectTo("my_courses.php");
-}

@@ -1,5 +1,8 @@
 <?php
 include_once "config/connect.php";
+if(isset($_POST['user'])){
+    $user=getUser();
+}
 
 ?>
 <!DOCTYPE html>
@@ -22,6 +25,7 @@ include_once "config/connect.php";
         <div class="w-8/12 flex flex-col gap-4 px-5 pt-24 pb-12">
             <h1 class="text-xl font-bold">My Courses</h1>
             <?php
+            $user_id = $user['user_id'];
             $calling_enrollCourse =   $connect->query("select * from enroll_course where status='0'");
             $getCourse = $calling_enrollCourse->fetch_assoc();
             $countCourse = $calling_enrollCourse->num_rows;
@@ -37,9 +41,8 @@ include_once "config/connect.php";
                             <p class="capitalize">🔴 <?= $course['course_type']?></p>
                         </div>
                     </div>
-                <?php endwhile;
-            else:
-                ?>
+                <?php endwhile;?>
+                <?php else:?>
                 <h1>Empty</h1>
             <?php endif; ?>
         </div>
